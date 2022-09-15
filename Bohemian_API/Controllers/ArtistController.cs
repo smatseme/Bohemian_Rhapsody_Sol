@@ -1,4 +1,5 @@
-﻿using Bohemian_API.Repository;
+﻿using Bohemian_API.Models;
+using Bohemian_API.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -28,6 +29,54 @@ namespace Bohemian_API.Controllers
                 if (artist == null)
                     return NotFound();
                 return Ok(artist);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("[action]/id")]
+        public IActionResult GetArtistById(int id)
+        {
+            try
+            {
+                var artist = _artistRepository.GetArtistByID(id);
+                if (artist == null) return NotFound();
+                return Ok(artist);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+
+        [HttpPost]
+        [Route("[action]")]
+        public IActionResult SaveArtist(Artist artistModel)
+        {
+            try
+            {
+                var model = _artistRepository.NewArtist(artistModel);
+
+                return Ok(model);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpDelete]
+        [Route("[action]")]
+        public IActionResult DeleteArtist(int id)
+        {
+            try
+            {
+                var model = _artistRepository.DeleteArtist(id);
+                return Ok(model);
             }
             catch (Exception)
             {

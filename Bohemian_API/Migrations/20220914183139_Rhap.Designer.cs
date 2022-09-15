@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Bohemian_API.Migrations
 {
-    [DbContext(typeof(DBContextBohemian))]
+    [DbContext(typeof(BohemianContext))]
     [Migration("20220914183139_Rhap")]
     partial class Rhap
     {

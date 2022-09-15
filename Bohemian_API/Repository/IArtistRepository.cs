@@ -10,8 +10,11 @@ namespace Bohemian_API.Repository
     public interface IArtistRepository
     {
         List<Artist> GetAllArtist();
+
         Artist GetArtistByID(int artist_Id);
+
         ResponseModel NewArtist(Artist artistModel);
+
         ResponseModel DeleteArtist(int artist_Id);
     }
 }

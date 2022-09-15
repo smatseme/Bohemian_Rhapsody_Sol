@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Bohemian_API.Migrations
 {
-    [DbContext(typeof(DBContextBohemian))]
+    [DbContext(typeof(BohemianContext))]
     partial class DBContextBohemianModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

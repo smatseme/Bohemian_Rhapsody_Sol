@@ -29,7 +29,8 @@ namespace Bohemian_API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<DBContextBohemian>(x => x.UseSqlServer(Configuration.GetConnectionString("ConString")));
+            
+            services.AddDbContext<BohemianContext>(x => x.UseSqlServer(Configuration.GetConnectionString("ConString")));
             services.AddScoped<IArtistRepository, ArtistRepository>();
         }
 

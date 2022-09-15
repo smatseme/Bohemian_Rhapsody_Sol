@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace Bohemian_API.Models
 {
-    public class DBContextBohemian : DbContext
+    public class BohemianContext : DbContext
     {
-        public DBContextBohemian(DbContextOptions options): base(options) { }
-
+        public BohemianContext(DbContextOptions options) : base(options)
+        {
+            
+        }
         DbSet<Artist> Artists { get; set; }
         DbSet<Album> Albums { get; set; }
         DbSet<Genre> Genre { get; set; }

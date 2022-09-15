@@ -10,8 +10,8 @@ namespace Bohemian_API.Repository
 {
     public class ArtistRepository: IArtistRepository
     {
-        private DbContext _context;
-        public ArtistRepository(DbContext context)
+        private BohemianContext _context;
+        public ArtistRepository(BohemianContext context)
         {
             _context = context;
         }
