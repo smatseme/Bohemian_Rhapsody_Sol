@@ -75,7 +75,7 @@ namespace Bohemian_API.Controllers
 
         [HttpDelete]
         [Route("[action]")]
-        public IActionResult DeleteArtist(int id)
+        public IActionResult DeleteAlbum(int id)
         {
             try
             {

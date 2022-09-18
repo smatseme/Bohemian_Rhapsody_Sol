@@ -21,7 +21,7 @@ namespace Bohemian_API.Controllers
 
         [HttpPost]
         [Route("[action]")]
-        public IActionResult SaveArtist(Song songModel)
+        public IActionResult SaveSong(Song songModel)
         {
             try
             {
