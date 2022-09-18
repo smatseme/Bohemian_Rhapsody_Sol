@@ -11,24 +11,23 @@ namespace Bohemian_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ArtistController : ControllerBase
+    public class GenreController : ControllerBase
     {
-        readonly IArtistRepository _artistRepository;
-        public ArtistController(IArtistRepository repo)
+        readonly IGenreRepository _genreRepository;
+        public GenreController(IGenreRepository repo)
         {
-            _artistRepository = repo;
+            _genreRepository = repo;
         }
 
-        [HttpGet]
-        [Route("[action]")]
-        public IActionResult GetAllArtists()
+
+        public IActionResult GetAllGenre()
         {
             try
             {
-                var artist = _artistRepository.GetAllArtist();
-                if (artist == null)
+                var genre = _genreRepository.GetAllGenre();
+                if (genre == null)
                     return NotFound();
-                return Ok(artist);
+                return Ok(genre);
             }
             catch (Exception)
             {
@@ -38,28 +37,26 @@ namespace Bohemian_API.Controllers
 
         [HttpGet]
         [Route("[action]/id")]
-        public IActionResult GetArtistById(int id)
+        public IActionResult GetGenreById(int id)
         {
             try
             {
-                var artist = _artistRepository.GetArtistByID(id);
-                if (artist == null) return NotFound();
-                return Ok(artist);
+                var genre = _genreRepository.GetGenreByID(id);
+                if (genre == null) return NotFound();
+                return Ok(genre);
             }
             catch (Exception)
             {
                 return BadRequest();
             }
         }
-
-
         [HttpPost]
         [Route("[action]")]
-        public IActionResult SaveArtist(Artist artistModel)
+        public IActionResult SaveGenre(Genre genreModel)
         {
             try
             {
-                var model = _artistRepository.NewArtist(artistModel);
+                var model = _genreRepository.NewGenre(genreModel);
 
                 return Ok(model);
             }
@@ -71,11 +68,11 @@ namespace Bohemian_API.Controllers
 
         [HttpDelete]
         [Route("[action]")]
-        public IActionResult DeleteArtist(int id)
+        public IActionResult DeleteGenre(int id)
         {
             try
             {
-                var model = _artistRepository.DeleteArtist(id);
+                var model = _genreRepository.DeleteGenre(id);
                 return Ok(model);
             }
             catch (Exception)

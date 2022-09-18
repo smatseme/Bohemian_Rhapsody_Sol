@@ -1,66 +1,66 @@
-﻿using System;
+﻿using Bohemian_API.Models;
+using Bohemian_API.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Bohemian_API.Models;
-using Bohemian_API.ViewModels;
-using Microsoft.EntityFrameworkCore;
 
 namespace Bohemian_API.Repository
 {
-    public class ArtistRepository: IArtistRepository
+    public class AlbumRepository: IAlbumRepository
     {
         private BohemianContext _context;
-        public ArtistRepository(BohemianContext context)
+        public AlbumRepository(BohemianContext context)
         {
             _context = context;
         }
 
-        public List<Artist> GetAllArtist()
+        public List<Album> GetAlbums()
         {
-            List<Artist> artistList;
+            List<Album> albumList;
             try
             {
-                artistList = _context.Set<Artist>().ToList();
+                albumList = _context.Set<Album>().ToList();
             }
             catch (Exception)
             {
                 throw;
             }
 
-            return artistList;
+            return albumList;
         }
 
-        public Artist GetArtistByID(int artist_Id)
+        public Album GetAlbumByID(int album_Id)
         {
-            Artist artist;
+            Album album;
             try
             {
-                artist = _context.Find<Artist>(artist_Id);
+                album = _context.Find<Album>(album_Id);
             }
             catch (Exception)
             {
                 throw;
             }
-            return artist;
+            return album;
         }
 
-        public ResponseModel NewArtist(Artist artistModel)
+        public ResponseModel NewAlbum(Album albumModel)
         {
             ResponseModel model = new ResponseModel();
             try
             {
-                Artist _artist = GetArtistByID(artistModel.Artist_Id);
-                if (_artist != null)
+                Album _album = GetAlbumByID(albumModel.Album_Id);
+                if (_album != null)
                 {
-                    _artist.Artist_Name = artistModel.Artist_Name;
-                    _context.Update<Artist>(_artist);
-                    model.Messsage = "Artist Update Successfully";
+                    _album.Album_Title = albumModel.Album_Title;
+                    
+                    _context.Update<Album>(_album);
+                    model.Messsage = "Album Update Successfully";
                 }
-                else 
+                else
                 {
-                    _context.Add<Artist>(artistModel);
-                    model.Messsage = "Artist Added Successfully";
+                    _context.Add<Album>(albumModel);
+                    model.Messsage = "Album Added Successfully";
                 }
                 _context.SaveChanges();
                 model.IsSuccess = true;
@@ -74,15 +74,15 @@ namespace Bohemian_API.Repository
             return model;
         }
 
-        public ResponseModel DeleteArtist(int artist_Id)
+        public ResponseModel DeleteAlbum(int album_Id)
         {
             ResponseModel model = new ResponseModel();
             try
             {
-                Artist _artist = GetArtistByID(artist_Id);
-                if (_artist != null)
+                Album _album = GetAlbumByID(album_Id);
+                if (_album != null)
                 {
-                    _context.Remove<Artist>(_artist);
+                    _context.Remove<Album>(_album);
                     _context.SaveChanges();
                     model.IsSuccess = true;
                     model.Messsage = "Deleted Successfully";
@@ -103,6 +103,10 @@ namespace Bohemian_API.Repository
 
             return model;
         }
+
+       
+
+      
 
     }
 }

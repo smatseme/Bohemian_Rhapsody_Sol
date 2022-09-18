@@ -11,55 +11,59 @@ namespace Bohemian_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ArtistController : ControllerBase
+    public class AlbumController : ControllerBase
     {
-        readonly IArtistRepository _artistRepository;
-        public ArtistController(IArtistRepository repo)
+        readonly IAlbumRepository _albumRepository;
+        public AlbumController(IAlbumRepository repo)
         {
-            _artistRepository = repo;
+            _albumRepository = repo;
         }
 
         [HttpGet]
         [Route("[action]")]
-        public IActionResult GetAllArtists()
+        public IActionResult GetAlbums()
         {
             try
             {
-                var artist = _artistRepository.GetAllArtist();
-                if (artist == null)
+                var album = _albumRepository.GetAlbums();
+                if (album == null)
                     return NotFound();
-                return Ok(artist);
+                return Ok(album);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return BadRequest();
+
             }
+
         }
 
         [HttpGet]
         [Route("[action]/id")]
-        public IActionResult GetArtistById(int id)
+        public IActionResult GetAlbumById(int id)
         {
             try
             {
-                var artist = _artistRepository.GetArtistByID(id);
-                if (artist == null) return NotFound();
-                return Ok(artist);
+                var album = _albumRepository.GetAlbumByID(id);
+                if (album == null)
+                    return NotFound();
+                return Ok(album);
             }
             catch (Exception)
             {
                 return BadRequest();
             }
+
         }
 
 
         [HttpPost]
         [Route("[action]")]
-        public IActionResult SaveArtist(Artist artistModel)
+        public IActionResult NewAlbum(Album albumModel)
         {
             try
             {
-                var model = _artistRepository.NewArtist(artistModel);
+                var model = _albumRepository.NewAlbum(albumModel);
 
                 return Ok(model);
             }
@@ -75,7 +79,7 @@ namespace Bohemian_API.Controllers
         {
             try
             {
-                var model = _artistRepository.DeleteArtist(id);
+                var model = _albumRepository.DeleteAlbum(id);
                 return Ok(model);
             }
             catch (Exception)
@@ -83,5 +87,7 @@ namespace Bohemian_API.Controllers
                 return BadRequest();
             }
         }
+
+
     }
 }

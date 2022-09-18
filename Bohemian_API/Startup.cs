@@ -29,9 +29,15 @@ namespace Bohemian_API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            
+
+            services.AddSwaggerGen();
+
+
             services.AddDbContext<BohemianContext>(x => x.UseSqlServer(Configuration.GetConnectionString("ConString")));
             services.AddScoped<IArtistRepository, ArtistRepository>();
+            services.AddScoped<IAlbumRepository, AlbumRepository>();
+            services.AddScoped<ISongRepository, SongRepository>();
+            services.AddScoped<IGenreRepository, GenreRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +47,13 @@ namespace Bohemian_API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Music catalogue Api v1");
+            });
+
 
             app.UseHttpsRedirection();
 
